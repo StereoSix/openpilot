@@ -413,7 +413,7 @@ static void ui_draw_vision_maxspeed(UIState *s) {
   int speedlim_calc = speedlimit * 2.2369363 + 0.5;
   int speed_lim_off = s->speed_lim_off * 2.2369363 + 0.5;
   if (s->is_metric) {
-    maxspeed_calc = maxspeed + 0.5;
+    maxspeed_calc = maxspeed + maxspeed/32 + 0.5;
     speedlim_calc = speedlimit * 3.6 + 0.5;
     speed_lim_off = s->speed_lim_off * 3.6 + 0.5;
   }
@@ -523,7 +523,7 @@ static void ui_draw_vision_speed(UIState *s) {
   const UIScene *scene = &s->scene;
   float speed = s->scene.v_ego * 2.2369363 + 0.5;
   if (s->is_metric){
-    speed = s->scene.v_ego * 3.6 + 0.5;
+    speed = s->scene.v_ego * 3.6 + (s->scene.v_ego * 3.6 / 32) + 0.5;
   }
   const int viz_speed_w = 280;
   const int viz_speed_x = scene->ui_viz_rx+((scene->ui_viz_rw/2)-(viz_speed_w/2));
